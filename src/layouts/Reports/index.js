@@ -4,39 +4,51 @@ import ReportsTable from 'components/ReportsTable';
 import useAxios from 'hooks/useAxios';
 
 export default function Reports() {
-  const [data, setData] = useState([]);
+  const [projectsData, setProjectsData] = useState([]);
+  const [gatewaysData, setGatewaysData] = useState([]);
 
-  const { response, loading, error } = useAxios({
+  const { projectsResponse, projectsLoading, projectsError } = useAxios({
     method: 'get',
     url: '/projects',
   });
 
-  useEffect(() => {
-    if (response !== null) {
-      console.log(response.data)
-      setData(response.data);
-    }
-  }, [response]);
+  const { gatewaysResponse, gatewaysLoading, gatewaysError } = useAxios({
+    method: 'get',
+    url: '/gateways',
+  });
 
   useEffect(() => {
-    if (error !== null) {
-      console.log(error);
+    if (projectsResponse != null) {
+      console.log(projectsResponse.data)
+      setProjectsData(projectsResponse.data);
     }
-  }, [error]);
+  }, [projectsResponse]);
 
+  useEffect(() => {
+    if (gatewaysResponse != null) {
+      console.log(gatewaysResponse.data)
+      setGatewaysData(gatewaysResponse.data);
+    }
+  }, [gatewaysResponse]);
+
+  useEffect(() => {
+    console.log(projectsError || gatewaysError)
+  }, [projectsError, gatewaysError]);
 
   return (
     <>
       <div>
         <ReportsHeader 
-          projects={data} 
+          projects={projectsData}
+          gateways={gatewaysData}
         />
       </div>
-      {loading ? (
+      {(projectsLoading || gatewaysLoading) ? (
         <p>Loading...</p>
       ) : (
         <ReportsTable 
-          projects={data} 
+          projects={projectsData}
+          gateways={gatewaysData}
         />
       )}
     </>
