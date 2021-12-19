@@ -8,7 +8,7 @@ export default function Reports() {
   const [gatewaysData, setGatewaysData] = useState([]);
   const [selectedProject, setSelectedProject] = useState();
   const [selectedGateway, setSelectedGateway] = useState();
-
+  const [filteredData, setFilteredData] = useState([]);
 
 
   const { response: projectsResponse, projectsLoading, projectsError } = useAxios({
@@ -37,7 +37,18 @@ export default function Reports() {
     console.log(projectsError || gatewaysError)
   }, [projectsError, gatewaysError]);
 
-  // const onProjectSelect
+
+  const onSetFilters = () => {
+    const data = projectsData.filter(project => {
+      const isSelectedProject = selectedProject ? (selectedProject === project.projectId) : true;
+
+      const isSelectedGateway = selectedGateway ? project.gatewayIds.includes(selectedGateway) : true;
+
+      return (isSelectedProject && isSelectedGateway);
+    })
+
+    setFilteredData(data);
+  }
 
   return (
     <>
@@ -49,6 +60,7 @@ export default function Reports() {
           onGatewaySelect={(gatewayId) => {setSelectedGateway(gatewayId)}}
           selectedProject={selectedProject}
           selectedGateway={selectedGateway}
+          onSetFilters={onSetFilters}
         />
       </div>
       {(projectsLoading || gatewaysLoading) ? (
@@ -57,6 +69,7 @@ export default function Reports() {
         <ReportsTable 
           projects={projectsData}
           gateways={gatewaysData}
+          filteredData={filteredData}
         />
       )}
     </>

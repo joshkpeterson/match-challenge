@@ -1,11 +1,12 @@
 import React from 'react'
 
-export default function ReportsTable({ projects, gateways }) {
-    console.log(projects)
+export default function ReportsTable({ projects, gateways, filteredData }) {
+    console.log(filteredData)
     return (
         <div>
-            {projects && 'hey there'}
-            {gateways && 'hey asdf'}
+            {projects && 'has projects'}
+            {gateways && ' / has gateways'}
+            {filteredData && ' / has filtered data'}
         </div>
     )
 }
