@@ -6,6 +6,10 @@ import useAxios from 'hooks/useAxios';
 export default function Reports() {
   const [projectsData, setProjectsData] = useState([]);
   const [gatewaysData, setGatewaysData] = useState([]);
+  const [selectedProject, setSelectedProject] = useState();
+  const [selectedGateway, setSelectedGateway] = useState();
+
+
 
   const { response: projectsResponse, projectsLoading, projectsError } = useAxios({
     method: 'get',
@@ -33,12 +37,18 @@ export default function Reports() {
     console.log(projectsError || gatewaysError)
   }, [projectsError, gatewaysError]);
 
+  // const onProjectSelect
+
   return (
     <>
       <div>
         <ReportsHeader 
           projects={projectsData}
           gateways={gatewaysData}
+          onProjectSelect={(projectId) => {setSelectedProject(projectId)}}
+          onGatewaySelect={(gatewayId) => {setSelectedGateway(gatewayId)}}
+          selectedProject={selectedProject}
+          selectedGateway={selectedGateway}
         />
       </div>
       {(projectsLoading || gatewaysLoading) ? (
