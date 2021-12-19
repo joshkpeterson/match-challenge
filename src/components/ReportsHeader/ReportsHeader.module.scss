@@ -1,0 +1,13 @@
+.reportsHeader {
+  margin: 32px 0 0 0;
+  background: tomato;
+  text-align: left;
+
+  &__filterToolbar {
+    display: inline-flex;
+  }
+
+  &__filterButton {
+    margin: 0 24px 0 0;
+  }
+}
