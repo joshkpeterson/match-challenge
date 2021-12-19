@@ -7,26 +7,24 @@ export default function Reports() {
   const [projectsData, setProjectsData] = useState([]);
   const [gatewaysData, setGatewaysData] = useState([]);
 
-  const { projectsResponse, projectsLoading, projectsError } = useAxios({
+  const { response: projectsResponse, projectsLoading, projectsError } = useAxios({
     method: 'get',
     url: '/projects',
   });
 
-  const { gatewaysResponse, gatewaysLoading, gatewaysError } = useAxios({
+  const { response: gatewaysResponse, gatewaysLoading, gatewaysError } = useAxios({
     method: 'get',
     url: '/gateways',
   });
 
   useEffect(() => {
     if (projectsResponse != null) {
-      console.log(projectsResponse.data)
       setProjectsData(projectsResponse.data);
     }
   }, [projectsResponse]);
 
   useEffect(() => {
     if (gatewaysResponse != null) {
-      console.log(gatewaysResponse.data)
       setGatewaysData(gatewaysResponse.data);
     }
   }, [gatewaysResponse]);
