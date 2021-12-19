@@ -53,7 +53,7 @@ export default function Reports() {
   return (
     <>
       <div>
-        <ReportsHeader 
+        <ReportsHeader
           projects={projectsData}
           gateways={gatewaysData}
           onProjectSelect={(projectId) => {setSelectedProject(projectId)}}
@@ -66,7 +66,7 @@ export default function Reports() {
       {(projectsLoading || gatewaysLoading) ? (
         <p>Loading...</p>
       ) : (
-        <ReportsTable 
+        <ReportsTable
           projects={projectsData}
           gateways={gatewaysData}
           filteredData={filteredData}

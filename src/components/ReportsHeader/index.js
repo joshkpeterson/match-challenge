@@ -26,6 +26,7 @@ export default function ReportsHeader({
           title={selectedProject ? projects.find(project => project.projectId === selectedProject).name : 'All Projects'}
           onSelect={onProjectSelect}
         >
+          <Dropdown.Item eventKey="">All Projects</Dropdown.Item>
           {projects.map(item => {
             return <Dropdown.Item eventKey={item.projectId} key={item.projectId}>{item.name}</Dropdown.Item>;
           })}
@@ -35,6 +36,7 @@ export default function ReportsHeader({
           title={selectedGateway ? gateways.find(gateway => gateway.gatewayId === selectedGateway).name : 'All Gateways'}
           onSelect={onGatewaySelect}
         >
+          <Dropdown.Item eventKey="">All Gateways</Dropdown.Item>
           {gateways.map(item => {
             return <Dropdown.Item eventKey={item.gatewayId} key={item.gatewayId}>{item.name}</Dropdown.Item>;
           })}
