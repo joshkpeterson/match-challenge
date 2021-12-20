@@ -1,0 +1,33 @@
+.reportsHeader {
+  margin: 32px 0 0 0;
+  text-align: left;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  &__heading {
+    display: inline-flex;
+    overflow: hidden;
+    flex-direction: column;
+    margin-right: auto;
+    flex-shrink: 0;
+    margin: 0 32px 28px 0;
+
+    &__mainHeading {
+      color: blue;
+    }
+
+    &__subHeading {
+      color: red;
+    }
+  }
+
+  &__filterToolbar {
+    flex-wrap: nowrap;
+    margin: 0 0 28px 0;
+  }
+
+  &__filterButton {
+    margin: 0 24px 0 0;
+  }
+}
