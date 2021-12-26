@@ -71,6 +71,9 @@ export default function Reports() {
     console.log(selectedGateway)
     console.log(reportsData)
 
+
+    const newData = [];
+
     const data = reportsData.filter((project) => {
       const isSelectedProject = selectedProject
         ? selectedProject.id === project.projectId
@@ -83,9 +86,46 @@ export default function Reports() {
       return isSelectedProject && isSelectedGateway;
     });
 
-    console.log(data)
+    const isGroupedByProject = !(selectedProject && !selectedGateway);
 
-    setFilteredData(data);
+    reportsData.forEach(transaction => {
+      const id = isGroupedByProject ? transaction.projectId : transaction.gatewayId; // pick gateways or projects
+
+      const isSelectedProject = selectedProject
+        ? selectedProject.id === transaction.projectId
+        : true;
+
+      const isSelectedGateway = selectedGateway
+        ? selectedGateway.id === transaction.gatewayId
+        : true;
+
+      if (isSelectedProject && isSelectedGateway) {
+        if (newData[id]) {
+          newData[id].transactions.push(transaction);
+          newData[id].total = +(newData[id].total + transaction.amount).toFixed(2);
+          
+        } else {
+          newData[id] = {
+            id,
+            name: isGroupedByProject ? projectsData.find(project => project.projectId === id).name : gatewaysData.find(gateway => gateway.gatewayId === id)?.name,
+            total: transaction.amount,
+            transactions: [transaction]
+          }
+        }
+      }
+
+      // now sort
+    
+    })
+
+    console.log(newData)
+
+
+    // console.log(data)
+
+
+
+    // setFilteredData(data);
   };
 
   return (
