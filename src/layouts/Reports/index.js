@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import ReportsHeader from 'components/ReportsHeader';
-import ReportsTable from 'components/ReportsTable';
-import useAxios from 'hooks/useAxios';
+import React, { useState, useEffect } from "react";
+import ReportsHeader from "components/ReportsHeader";
+import ReportsTable from "components/ReportsTable";
+import useAxios from "hooks/useAxios";
 
 export default function Reports() {
   const [projectsData, setProjectsData] = useState([]);
@@ -10,15 +10,22 @@ export default function Reports() {
   const [selectedGateway, setSelectedGateway] = useState();
   const [filteredData, setFilteredData] = useState([]);
 
-
-  const { response: projectsResponse, projectsLoading, projectsError } = useAxios({
-    method: 'get',
-    url: '/projects',
+  const {
+    response: projectsResponse,
+    projectsLoading,
+    projectsError,
+  } = useAxios({
+    method: "get",
+    url: "/projects",
   });
 
-  const { response: gatewaysResponse, gatewaysLoading, gatewaysError } = useAxios({
-    method: 'get',
-    url: '/gateways',
+  const {
+    response: gatewaysResponse,
+    gatewaysLoading,
+    gatewaysError,
+  } = useAxios({
+    method: "get",
+    url: "/gateways",
   });
 
   useEffect(() => {
@@ -34,21 +41,26 @@ export default function Reports() {
   }, [gatewaysResponse]);
 
   useEffect(() => {
-    console.log(projectsError || gatewaysError)
+    console.log(projectsError || gatewaysError);
   }, [projectsError, gatewaysError]);
 
-
+  // Currently this filters for all the relevant projects -
+  // The next step is to filter all results from /report
   const onSetFilters = () => {
-    const data = projectsData.filter(project => {
-      const isSelectedProject = selectedProject ? (selectedProject === project.projectId) : true;
+    const data = projectsData.filter((project) => {
+      const isSelectedProject = selectedProject
+        ? selectedProject === project.projectId
+        : true;
 
-      const isSelectedGateway = selectedGateway ? project.gatewayIds.includes(selectedGateway) : true;
+      const isSelectedGateway = selectedGateway
+        ? project.gatewayIds.includes(selectedGateway)
+        : true;
 
-      return (isSelectedProject && isSelectedGateway);
-    })
+      return isSelectedProject && isSelectedGateway;
+    });
 
     setFilteredData(data);
-  }
+  };
 
   return (
     <>
@@ -56,14 +68,18 @@ export default function Reports() {
         <ReportsHeader
           projects={projectsData}
           gateways={gatewaysData}
-          onProjectSelect={(projectId) => {setSelectedProject(projectId)}}
-          onGatewaySelect={(gatewayId) => {setSelectedGateway(gatewayId)}}
+          onProjectSelect={(projectId) => {
+            setSelectedProject(projectId);
+          }}
+          onGatewaySelect={(gatewayId) => {
+            setSelectedGateway(gatewayId);
+          }}
           selectedProject={selectedProject}
           selectedGateway={selectedGateway}
           onSetFilters={onSetFilters}
         />
       </div>
-      {(projectsLoading || gatewaysLoading) ? (
+      {projectsLoading || gatewaysLoading ? (
         <p>Loading...</p>
       ) : (
         <ReportsTable
@@ -73,5 +89,5 @@ export default function Reports() {
         />
       )}
     </>
-  )
+  );
 }
