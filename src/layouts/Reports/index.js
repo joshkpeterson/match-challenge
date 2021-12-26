@@ -77,7 +77,7 @@ export default function Reports() {
         : true;
 
       const isSelectedGateway = selectedGateway
-        ? selectedGateway === project.gatewayId
+        ? selectedGateway.id === project.gatewayId
         : true;
 
       return isSelectedProject && isSelectedGateway;
@@ -101,11 +101,9 @@ export default function Reports() {
             });
           }}
           onGatewaySelect={(id) => {
-            console.log(gatewaysData.find(gateway => gateway.gatewayId === id))
-            console.log(id)
             setSelectedGateway(id && {
               id,
-              name: gatewaysData.find(gateway => gateway.gatewayId === id)?.name 
+              name: gatewaysData.find(gateway => gateway.gatewayId === id)?.name
             });
           }}
           selectedProject={selectedProject}
