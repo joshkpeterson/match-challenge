@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default function ReportsTable({ projects, gateways, filteredData }) {
-    console.log(filteredData)
+    // console.log(filteredData)
     return (
         <div>
             {projects && 'has projects'}

@@ -6,6 +6,7 @@ import useAxios from "hooks/useAxios";
 export default function Reports() {
   const [projectsData, setProjectsData] = useState([]);
   const [gatewaysData, setGatewaysData] = useState([]);
+  const [reportsData, setReportsData] = useState([]);
   const [selectedProject, setSelectedProject] = useState();
   const [selectedGateway, setSelectedGateway] = useState();
   const [filteredData, setFilteredData] = useState([]);
@@ -27,6 +28,18 @@ export default function Reports() {
     method: "get",
     url: "/gateways",
   });
+  
+  const {
+    response: reportsResponse,
+    reportsError,
+  } = useAxios({
+    method: "post",
+    url: "/report",
+    body: JSON.stringify({}),
+    headers: JSON.stringify({
+      'Content-Type': 'application/json',
+  })
+  });
 
   useEffect(() => {
     if (projectsResponse != null) {
@@ -41,23 +54,36 @@ export default function Reports() {
   }, [gatewaysResponse]);
 
   useEffect(() => {
-    console.log(projectsError || gatewaysError);
-  }, [projectsError, gatewaysError]);
+    if (reportsResponse != null) {
+      console.log(reportsResponse)
+      setReportsData(reportsResponse.data);
+    }
+  }, [reportsResponse]);
+
+  useEffect(() => {
+    console.log(projectsError || gatewaysError || reportsError);
+  }, [projectsError, gatewaysError, reportsError]);
 
   // Currently this filters for all the relevant projects -
   // The next step is to filter all results from /report
   const onSetFilters = () => {
-    const data = projectsData.filter((project) => {
+    console.log(selectedProject)
+    console.log(selectedGateway)
+    console.log(reportsData)
+    
+    const data = reportsData.filter((project) => {
       const isSelectedProject = selectedProject
         ? selectedProject === project.projectId
         : true;
 
       const isSelectedGateway = selectedGateway
-        ? project.gatewayIds.includes(selectedGateway)
+        ? selectedGateway === project.gatewayId
         : true;
 
       return isSelectedProject && isSelectedGateway;
     });
+
+    console.log(data)
 
     setFilteredData(data);
   };

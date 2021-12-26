@@ -10,7 +10,7 @@ const useAxios = ({ url, method, body = null, headers = null }) => {
   const [loading, setloading] = useState(true);
   
   const fetchData = () => {
-    axios[method](url, JSON.parse(headers), JSON.parse(body))
+    axios[method](url, JSON.parse(body), JSON.parse(headers))
     .then((res) => {
       setResponse(res.data);
     })
