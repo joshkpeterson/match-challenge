@@ -23,7 +23,7 @@ export default function ReportsHeader({
       <ButtonToolbar className={styles.reportsHeader__filterToolbar}>
         <DropdownButton
           className={styles.reportsHeader__filterButton}
-          title={selectedProject ? projects.find(project => project.projectId === selectedProject).name : 'All Projects'}
+          title={selectedProject ? selectedProject.name : 'All Projects'}
           onSelect={onProjectSelect}
         >
           <Dropdown.Item eventKey="">All Projects</Dropdown.Item>
@@ -33,7 +33,7 @@ export default function ReportsHeader({
         </DropdownButton>
         <DropdownButton
           className={styles.reportsHeader__filterButton}
-          title={selectedGateway ? gateways.find(gateway => gateway.gatewayId === selectedGateway).name : 'All Gateways'}
+          title={selectedGateway ? selectedGateway.name : 'All Gateways'}
           onSelect={onGatewaySelect}
         >
           <Dropdown.Item eventKey="">All Gateways</Dropdown.Item>

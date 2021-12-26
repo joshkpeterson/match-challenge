@@ -70,10 +70,10 @@ export default function Reports() {
     console.log(selectedProject)
     console.log(selectedGateway)
     console.log(reportsData)
-    
+
     const data = reportsData.filter((project) => {
       const isSelectedProject = selectedProject
-        ? selectedProject === project.projectId
+        ? selectedProject.id === project.projectId
         : true;
 
       const isSelectedGateway = selectedGateway
@@ -94,11 +94,19 @@ export default function Reports() {
         <ReportsHeader
           projects={projectsData}
           gateways={gatewaysData}
-          onProjectSelect={(projectId) => {
-            setSelectedProject(projectId);
+          onProjectSelect={(id) => {
+            setSelectedProject(id && {
+              id,
+              name: projectsData.find(project => project.projectId === id).name
+            });
           }}
-          onGatewaySelect={(gatewayId) => {
-            setSelectedGateway(gatewayId);
+          onGatewaySelect={(id) => {
+            console.log(gatewaysData.find(gateway => gateway.gatewayId === id))
+            console.log(id)
+            setSelectedGateway(id && {
+              id,
+              name: gatewaysData.find(gateway => gateway.gatewayId === id)?.name 
+            });
           }}
           selectedProject={selectedProject}
           selectedGateway={selectedGateway}
@@ -109,6 +117,8 @@ export default function Reports() {
         <p>Loading...</p>
       ) : (
         <ReportsTable
+          selectedProject={selectedProject}
+          selectedGateway={selectedGateway}
           projects={projectsData}
           gateways={gatewaysData}
           filteredData={filteredData}
