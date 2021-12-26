@@ -72,7 +72,7 @@ export default function Reports() {
     console.log(reportsData)
 
 
-    const newData = [];
+    const newData = {};
 
     const data = reportsData.filter((project) => {
       const isSelectedProject = selectedProject
@@ -114,12 +114,26 @@ export default function Reports() {
         }
       }
 
-      // now sort
-    
+      
+      
     })
 
-    console.log(newData)
+    const newDataArray = Object.values(newData);
 
+    newDataArray.sort((a, b) => a.name.localeCompare(b.name));
+    const { compare } = Intl.Collator('en-US');
+    newDataArray.forEach((item) => {
+      item.transactions.sort((a, b) => compare(a.created, b.created));
+    })
+
+    console.log('jmm')
+    console.log(newDataArray)
+    console.log(newDataArray[0].name)
+
+
+    const foo = [{name: 'b'}, {name: 'a'}];
+    foo.sort((a, b) => (a.name.localeCompare(b.name)));
+    console.log(foo)
 
     // console.log(data)
 
