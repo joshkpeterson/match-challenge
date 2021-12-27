@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import styles from './ReportsChart.module.scss';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
+ChartJS.register(ChartDataLabels);
 
 const CHART_COLORS = [
   '#974fff',
@@ -29,6 +31,16 @@ export default function ReportsChart({ filteredData, totalAll }) {
           data: [],
           backgroundColor: [],
           borderWidth: 1,
+          datalabels: {
+            anchor: 'center',
+            backgroundColor: null,
+            borderWidth: 0,
+            color: 'white',
+            formatter: function(value, context) {
+              console.log(value)
+              return Math.round((value / totalAll) * 100) + '%';
+            }            
+          }
         },
       ],
     }
