@@ -1,4 +1,8 @@
 .reportsTable {
+  display: inline-block;
+  width: 100%;
+  min-width: 60%;
+
   &__heading {
     color: tomato;
   }

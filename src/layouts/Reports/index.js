@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReportsHeader from "components/ReportsHeader";
 import ReportsTable from "components/ReportsTable";
+import ReportsChart from "components/ReportsChart";
 import useAxios from "hooks/useAxios";
 
 export default function Reports() {
@@ -151,15 +152,23 @@ export default function Reports() {
       {projectsLoading || gatewaysLoading ? (
         <p>Loading...</p>
       ) : (
-
-
+        <div className={styles.reports__innerContainer}>
         <ReportsTable
           selectedProject={selectedProjectSubmitted}
           selectedGateway={selectedGatewaySubmitted}
           projects={projectsData}
           gateways={gatewaysData}
           filteredData={filteredData}
+          totalAll={totalAll}
         />
+        
+          {(!selectedProjectSubmitted && selectedGatewaySubmitted) || (selectedProjectSubmitted && !selectedGatewaySubmitted) &&
+          <ReportsChart 
+            filteredData={filteredData}
+            totalAll={totalAll}
+          />
+          }
+        </div>
       )}
               {console.log('hey')}
         {console.log(filteredData)}
