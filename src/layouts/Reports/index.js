@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import ReportsHeader from "components/ReportsHeader";
-import ReportsTable from "components/ReportsTable";
-import ReportsChart from "components/ReportsChart";
-import useAxios from "hooks/useAxios";
+import React, { useState, useEffect } from 'react';
+import ReportsHeader from 'components/ReportsHeader';
+import ReportsTable from 'components/ReportsTable';
+import ReportsChart from 'components/ReportsChart';
+import useAxios from 'hooks/useAxios';
 import styles from './Reports.module.scss';
 
 export default function Reports() {
@@ -12,7 +12,7 @@ export default function Reports() {
   const [selectedProject, setSelectedProject] = useState();
   const [selectedGateway, setSelectedGateway] = useState();
   const [filteredData, setFilteredData] = useState([]);
-  const [selectedProjectSubmitted, setSelectedProjectSubmitted] = useState()
+  const [selectedProjectSubmitted, setSelectedProjectSubmitted] = useState();
   const [selectedGatewaySubmitted, setSelectedGatewaySubmitted] = useState();
   const [totalAll, setTotalAll] = useState(0);
 
@@ -21,8 +21,8 @@ export default function Reports() {
     projectsLoading,
     projectsError,
   } = useAxios({
-    method: "get",
-    url: "/projects",
+    method: 'get',
+    url: '/projects',
   });
 
   const {
@@ -30,20 +30,17 @@ export default function Reports() {
     gatewaysLoading,
     gatewaysError,
   } = useAxios({
-    method: "get",
-    url: "/gateways",
+    method: 'get',
+    url: '/gateways',
   });
-  
-  const {
-    response: reportsResponse,
-    reportsError,
-  } = useAxios({
-    method: "post",
-    url: "/report",
+
+  const { response: reportsResponse, reportsError } = useAxios({
+    method: 'post',
+    url: '/report',
     body: JSON.stringify({}),
     headers: JSON.stringify({
       'Content-Type': 'application/json',
-  })
+    }),
   });
 
   useEffect(() => {
@@ -60,7 +57,7 @@ export default function Reports() {
 
   useEffect(() => {
     if (reportsResponse != null) {
-      console.log(reportsResponse)
+      console.log(reportsResponse);
       setReportsData(reportsResponse.data);
     }
   }, [reportsResponse]);
@@ -69,12 +66,12 @@ export default function Reports() {
     console.log(projectsError || gatewaysError || reportsError);
   }, [projectsError, gatewaysError, reportsError]);
 
-  /*  
-  *   When Generate Report button is clicked,
-  *   all reports are filtered according to current selections
-  *   and then sorted according to project/gateway and
-  *   transaction date.
-  */
+  /*
+   *   When Generate Report button is clicked,
+   *   all reports are filtered according to current selections
+   *   and then sorted according to project/gateway and
+   *   transaction date.
+   */
   const onSetFilters = () => {
     // When All Gateways + 1 Project selected, results are grouped by
     // Gateway. For all others, they are grouped by Project.
@@ -85,8 +82,10 @@ export default function Reports() {
     setSelectedGatewaySubmitted(selectedGateway);
 
     // Todo: this works, but could be refactored to functional style with a map
-    reportsData.forEach(transaction => {
-      const id = isGroupedByProject ? transaction.projectId : transaction.gatewayId;
+    reportsData.forEach((transaction) => {
+      const id = isGroupedByProject
+        ? transaction.projectId
+        : transaction.gatewayId;
 
       const isSelectedProject = selectedProject
         ? selectedProject.id === transaction.projectId
@@ -99,22 +98,26 @@ export default function Reports() {
       if (isSelectedProject && isSelectedGateway) {
         if (groupedData[id]) {
           groupedData[id].transactions.push(transaction);
-          groupedData[id].total = +(groupedData[id].total + transaction.amount).toFixed(2);
+          groupedData[id].total = +(
+            groupedData[id].total + transaction.amount
+          ).toFixed(2);
         } else {
           groupedData[id] = {
             id,
-            name: isGroupedByProject ? projectsData.find(project => project.projectId === id).name : gatewaysData.find(gateway => gateway.gatewayId === id)?.name,
+            name: isGroupedByProject
+              ? projectsData.find((project) => project.projectId === id).name
+              : gatewaysData.find((gateway) => gateway.gatewayId === id)?.name,
             total: transaction.amount,
-            transactions: [transaction]
-          }
+            transactions: [transaction],
+          };
         }
       }
-    })
+    });
 
     // Sort top-level Projects or Gateways by alphabetical order.
     const sortedData = Object.values(groupedData);
     sortedData.sort((a, b) => a.name.localeCompare(b.name));
-    
+
     // Sort nested transactions by date created, ascending.
     // While iterating, calculate total for all items.
     const { compare } = Intl.Collator('en-US');
@@ -122,7 +125,7 @@ export default function Reports() {
     sortedData.forEach((item) => {
       item.transactions.sort((a, b) => compare(a.created, b.created));
       total += item.total;
-    })
+    });
 
     setFilteredData(sortedData);
     setTotalAll(total);
@@ -135,16 +138,22 @@ export default function Reports() {
           projects={projectsData}
           gateways={gatewaysData}
           onProjectSelect={(id) => {
-            setSelectedProject(id && {
-              id,
-              name: projectsData.find(project => project.projectId === id).name
-            });
+            setSelectedProject(
+              id && {
+                id,
+                name: projectsData.find((project) => project.projectId === id)
+                  .name,
+              },
+            );
           }}
           onGatewaySelect={(id) => {
-            setSelectedGateway(id && {
-              id,
-              name: gatewaysData.find(gateway => gateway.gatewayId === id)?.name
-            });
+            setSelectedGateway(
+              id && {
+                id,
+                name: gatewaysData.find((gateway) => gateway.gatewayId === id)
+                  ?.name,
+              },
+            );
           }}
           selectedProject={selectedProject}
           selectedGateway={selectedGateway}
@@ -155,20 +164,18 @@ export default function Reports() {
         <p>Loading...</p>
       ) : (
         <div className={styles.reports__innerContainer}>
-        <ReportsTable
-          selectedProject={selectedProjectSubmitted}
-          selectedGateway={selectedGatewaySubmitted}
-          projects={projectsData}
-          gateways={gatewaysData}
-          filteredData={filteredData}
-          totalAll={totalAll}
-        />
-          {((!selectedProjectSubmitted && selectedGatewaySubmitted) || (selectedProjectSubmitted && !selectedGatewaySubmitted)) &&
-            <ReportsChart 
-              filteredData={filteredData}
-              totalAll={totalAll}
-            />
-          }
+          <ReportsTable
+            selectedProject={selectedProjectSubmitted}
+            selectedGateway={selectedGatewaySubmitted}
+            projects={projectsData}
+            gateways={gatewaysData}
+            filteredData={filteredData}
+            totalAll={totalAll}
+          />
+          {((!selectedProjectSubmitted && selectedGatewaySubmitted) ||
+            (selectedProjectSubmitted && !selectedGatewaySubmitted)) && (
+            <ReportsChart filteredData={filteredData} totalAll={totalAll} />
+          )}
         </div>
       )}
     </>
