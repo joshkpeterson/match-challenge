@@ -10,6 +10,8 @@ export default function Reports() {
   const [selectedProject, setSelectedProject] = useState();
   const [selectedGateway, setSelectedGateway] = useState();
   const [filteredData, setFilteredData] = useState([]);
+  const [selectedProjectSubmitted, setSelectedProjectSubmitted] = useState()
+  const [selectedGatewaySubmitted, setSelectedGatewaySubmitted] = useState();
 
   const {
     response: projectsResponse,
@@ -75,6 +77,9 @@ export default function Reports() {
     // Gateway. For all others, they are grouped by Project.
     const isGroupedByProject = !(selectedProject && !selectedGateway);
     const groupedData = {};
+
+    setSelectedProjectSubmitted(selectedProject);
+    setSelectedGatewaySubmitted(selectedGateway);
 
     reportsData.forEach(transaction => {
       const id = isGroupedByProject ? transaction.projectId : transaction.gatewayId;
@@ -144,8 +149,8 @@ export default function Reports() {
 
 
         <ReportsTable
-          selectedProject={selectedProject}
-          selectedGateway={selectedGateway}
+          selectedProject={selectedProjectSubmitted}
+          selectedGateway={selectedGatewaySubmitted}
           projects={projectsData}
           gateways={gatewaysData}
           filteredData={filteredData}
