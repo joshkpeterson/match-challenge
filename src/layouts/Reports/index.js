@@ -141,6 +141,8 @@ export default function Reports() {
       {projectsLoading || gatewaysLoading ? (
         <p>Loading...</p>
       ) : (
+
+
         <ReportsTable
           selectedProject={selectedProject}
           selectedGateway={selectedGateway}
@@ -149,6 +151,8 @@ export default function Reports() {
           filteredData={filteredData}
         />
       )}
+              {console.log('hey')}
+        {console.log(filteredData)}
     </>
   );
 }

@@ -6,36 +6,40 @@ export default function ReportsTable({ selectedProject, selectedGateway, project
   // console.log(filteredData)
   return (
     <div className={styles.reportsTable}>
+      {!!filteredData && <>
+
       <p className={styles.reportsTable__heading}>
       {selectedProject ? `${selectedProject.name}` : 'All Projects'} | {selectedGateway ? `${selectedGateway.name}` : 'All Gateways'}
       </p>
       
       <Accordion defaultActiveKey="0" flush>
-        <Accordion.Item eventKey="0">
-          <Accordion.Header>Accordion Item #1</Accordion.Header>
-          <Accordion.Body>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-          veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-          velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-          cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-          est laborum.
-          </Accordion.Body>
-        </Accordion.Item>
-        <Accordion.Item eventKey="1">
-        <Accordion.Header>Accordion Item #2</Accordion.Header>
-        <Accordion.Body>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-        est laborum.
-        </Accordion.Body>
-        </Accordion.Item>
+        {filteredData.map((item, index) => (
+          <Accordion.Item eventKey={index} key={item.id}>
+            <Accordion.Header>{item.name}</Accordion.Header>
+            <Accordion.Body>
+              <table className={styles.reportsTable__table}>
+                <tr>
+                  <th>Date</th>
+                  <th>Transaction ID</th>
+                  <th>Amount</th>
+                </tr>
+                {console.log(item)}
+                {item.transactions.map(transaction => (
+                  <tr key={transaction.paymendId}>
+                    <td data-th="Date">{transaction.created}</td>
+                    <td data-th="Transaction ID">{transaction.paymentId.substr(-5)}</td>
+                    <td data-th="Amount">{transaction.amount}</td>
+                  </tr>
+                ))}
+
+              </table>
+            </Accordion.Body>
+          </Accordion.Item>
+        ))}
       </Accordion>
+      </>
+      }
+
       
     </div>
     )
