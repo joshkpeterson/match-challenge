@@ -12,6 +12,7 @@ export default function Reports() {
   const [filteredData, setFilteredData] = useState([]);
   const [selectedProjectSubmitted, setSelectedProjectSubmitted] = useState()
   const [selectedGatewaySubmitted, setSelectedGatewaySubmitted] = useState();
+  const [totalAll, setTotalAll] = useState(0);
 
   const {
     response: projectsResponse,
@@ -107,17 +108,21 @@ export default function Reports() {
       }
     })
 
-    // Sort top-level Projects or Gateways by alphabetical order
+    // Sort top-level Projects or Gateways by alphabetical order.
     const sortedData = Object.values(groupedData);
     sortedData.sort((a, b) => a.name.localeCompare(b.name));
     
-    // Sort nested transactions by date created, ascending
+    // Sort nested transactions by date created, ascending.
+    // While iterating, calculate total for all items.
     const { compare } = Intl.Collator('en-US');
+    let total = 0;
     sortedData.forEach((item) => {
       item.transactions.sort((a, b) => compare(a.created, b.created));
+      total += item.total;
     })
 
     setFilteredData(sortedData);
+    setTotalAll(total);
   };
 
   return (

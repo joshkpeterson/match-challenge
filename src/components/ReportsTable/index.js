@@ -29,10 +29,10 @@ export default function ReportsTable({ selectedProject, selectedGateway, project
   const Results = () => {
     if (selectedProject && selectedGateway && filteredData.length === 1) {
       const { name, total, transactions} = filteredData[0];
-      return (<>
+      return <>
         <p>{name}</p>
         {ResultsTable(transactions)}
-      </>)
+      </>
     } else {
       return (
         <Accordion defaultActiveKey="0" flush>
