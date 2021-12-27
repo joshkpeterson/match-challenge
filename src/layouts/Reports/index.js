@@ -64,32 +64,20 @@ export default function Reports() {
     console.log(projectsError || gatewaysError || reportsError);
   }, [projectsError, gatewaysError, reportsError]);
 
-  // Currently this filters for all the relevant projects -
-  // The next step is to filter all results from /report
+  /*  
+  *   When Generate Report button is clicked,
+  *   all reports are filtered according to current selections
+  *   and then sorted according to project/gateway and
+  *   transaction date.
+  */
   const onSetFilters = () => {
-    console.log(selectedProject)
-    console.log(selectedGateway)
-    console.log(reportsData)
-
-
-    const newData = {};
-
-    const data = reportsData.filter((project) => {
-      const isSelectedProject = selectedProject
-        ? selectedProject.id === project.projectId
-        : true;
-
-      const isSelectedGateway = selectedGateway
-        ? selectedGateway.id === project.gatewayId
-        : true;
-
-      return isSelectedProject && isSelectedGateway;
-    });
-
+    // When All Gateways + 1 Project selected, results are grouped by
+    // Gateway. For all others, they are grouped by Project.
     const isGroupedByProject = !(selectedProject && !selectedGateway);
+    const groupedData = {};
 
     reportsData.forEach(transaction => {
-      const id = isGroupedByProject ? transaction.projectId : transaction.gatewayId; // pick gateways or projects
+      const id = isGroupedByProject ? transaction.projectId : transaction.gatewayId;
 
       const isSelectedProject = selectedProject
         ? selectedProject.id === transaction.projectId
@@ -100,12 +88,11 @@ export default function Reports() {
         : true;
 
       if (isSelectedProject && isSelectedGateway) {
-        if (newData[id]) {
-          newData[id].transactions.push(transaction);
-          newData[id].total = +(newData[id].total + transaction.amount).toFixed(2);
-          
+        if (groupedData[id]) {
+          groupedData[id].transactions.push(transaction);
+          groupedData[id].total = +(groupedData[id].total + transaction.amount).toFixed(2);
         } else {
-          newData[id] = {
+          groupedData[id] = {
             id,
             name: isGroupedByProject ? projectsData.find(project => project.projectId === id).name : gatewaysData.find(gateway => gateway.gatewayId === id)?.name,
             total: transaction.amount,
@@ -113,33 +100,19 @@ export default function Reports() {
           }
         }
       }
-
-      
-      
     })
 
-    const newDataArray = Object.values(newData);
-
-    newDataArray.sort((a, b) => a.name.localeCompare(b.name));
+    // Sort top-level Projects or Gateways by alphabetical order
+    const sortedData = Object.values(groupedData);
+    sortedData.sort((a, b) => a.name.localeCompare(b.name));
+    
+    // Sort nested transactions by date created, ascending
     const { compare } = Intl.Collator('en-US');
-    newDataArray.forEach((item) => {
+    sortedData.forEach((item) => {
       item.transactions.sort((a, b) => compare(a.created, b.created));
     })
 
-    console.log('jmm')
-    console.log(newDataArray)
-    console.log(newDataArray[0].name)
-
-
-    const foo = [{name: 'b'}, {name: 'a'}];
-    foo.sort((a, b) => (a.name.localeCompare(b.name)));
-    console.log(foo)
-
-    // console.log(data)
-
-
-
-    // setFilteredData(data);
+    setFilteredData(sortedData);
   };
 
   return (
