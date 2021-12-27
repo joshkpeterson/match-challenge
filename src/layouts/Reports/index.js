@@ -3,6 +3,7 @@ import ReportsHeader from "components/ReportsHeader";
 import ReportsTable from "components/ReportsTable";
 import ReportsChart from "components/ReportsChart";
 import useAxios from "hooks/useAxios";
+import styles from './Reports.module.scss';
 
 export default function Reports() {
   const [projectsData, setProjectsData] = useState([]);
@@ -83,6 +84,7 @@ export default function Reports() {
     setSelectedProjectSubmitted(selectedProject);
     setSelectedGatewaySubmitted(selectedGateway);
 
+    // Todo: this works, but could be refactored to functional style with a map
     reportsData.forEach(transaction => {
       const id = isGroupedByProject ? transaction.projectId : transaction.gatewayId;
 
@@ -161,7 +163,6 @@ export default function Reports() {
           filteredData={filteredData}
           totalAll={totalAll}
         />
-        
           {(!selectedProjectSubmitted && selectedGatewaySubmitted) || (selectedProjectSubmitted && !selectedGatewaySubmitted) &&
           <ReportsChart 
             filteredData={filteredData}
