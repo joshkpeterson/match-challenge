@@ -163,16 +163,14 @@ export default function Reports() {
           filteredData={filteredData}
           totalAll={totalAll}
         />
-          {(!selectedProjectSubmitted && selectedGatewaySubmitted) || (selectedProjectSubmitted && !selectedGatewaySubmitted) &&
-          <ReportsChart 
-            filteredData={filteredData}
-            totalAll={totalAll}
-          />
+          {((!selectedProjectSubmitted && selectedGatewaySubmitted) || (selectedProjectSubmitted && !selectedGatewaySubmitted)) &&
+            <ReportsChart 
+              filteredData={filteredData}
+              totalAll={totalAll}
+            />
           }
         </div>
       )}
-              {console.log('hey')}
-        {console.log(filteredData)}
     </>
   );
 }

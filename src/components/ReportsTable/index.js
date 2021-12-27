@@ -3,7 +3,7 @@ import Accordion from 'react-bootstrap/Accordion';
 import styles from './ReportsTable.module.scss';
 
 export default function ReportsTable({ selectedProject, selectedGateway, projects, gateways, filteredData }) {
-  // console.log(filteredData)
+  console.log(filteredData)
 
   const ResultsTable = (transactions) => (
     <table className={styles.reportsTable__table}>
@@ -30,7 +30,6 @@ export default function ReportsTable({ selectedProject, selectedGateway, project
     if (selectedProject && selectedGateway && filteredData.length === 1) {
       const { name, total, transactions} = filteredData[0];
       return <>
-        <p>{name}</p>
         {ResultsTable(transactions)}
       </>
     } else {
@@ -48,7 +47,6 @@ export default function ReportsTable({ selectedProject, selectedGateway, project
       )
     }
   }
-
 
   return (
     <div className={styles.reportsTable}>
