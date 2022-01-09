@@ -21,6 +21,7 @@ $theme-colors: (
   .accordion-button {
     border-radius: 10px !important;
     font-weight: bold;
+    height: 71px;
   }
 
   .accordion-button:not(.collapsed) {
