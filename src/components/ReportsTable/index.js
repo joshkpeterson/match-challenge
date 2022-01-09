@@ -14,15 +14,15 @@ export default function ReportsTable({
   const ResultsTable = (transactions) => (
     <table className={styles.reportsTable__table}>
       <thead>
-        <tr>
+        <tr className={styles.reportsTable__table__header}>
           <th>Date</th>
           <th>Transaction ID</th>
           <th>Amount</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody className={styles.reportsTable__table__body}>
         {transactions.map(({ paymentId, created, amount }) => (
-          <tr key={paymentId}>
+          <tr key={paymentId} className={styles.reportsTable__table__row}>
             <td data-th="Date">{created}</td>
             <td data-th="Transaction ID">{paymentId.substr(-5)}</td>
             <td data-th="Amount">{amount}</td>
@@ -52,7 +52,7 @@ export default function ReportsTable({
 
   return (
     <div className={styles.reportsTable}>
-      {!!filteredData && (
+      {!!filteredData.length && (
         <>
           <p className={styles.reportsTable__heading}>
             {selectedProject ? `${selectedProject.name}` : 'All Projects'} |{' '}

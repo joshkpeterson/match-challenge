@@ -1,9 +1,53 @@
+@import 'variables';
+
 .reportsTable {
-  display: inline-block;
-  width: 100%;
-  min-width: 50%;
+  flex: 1;
+  min-width: 520px;
+  color: $text-dark;
+  background-color: $bg-light;
+  border-radius: 10px;
+  padding: 18px;
+  margin: 0 31px 0 0;
 
   &__heading {
-    color: tomato;
+    margin: 0 0 34px 0;
+  }
+
+  &__table {
+    width: 100%;
+    font-weight: normal;
+
+    &__header {
+      background: white;
+      height: 35px;
+    }
+
+    &__row {
+      &:nth-child(even) {
+        background: white;
+        height: 35px;
+      }
+
+      &:first-child {
+        height: 45px;
+      }
+    }
+
+    &__row, &__header {
+      height: 41px;
+
+      & > * {
+        padding: 0 21px;
+
+        &:last-child {
+          text-align: right;
+        }
+
+        &:nth-child(2) {
+          text-align: center;
+        }
+      };
+    }
   }
 }
+

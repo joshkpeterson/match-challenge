@@ -1,5 +1,6 @@
+@import 'variables';
+
 .reportsHeader {
-  margin: 32px 0 0 0;
   text-align: left;
   display: flex;
   flex-wrap: wrap;
@@ -14,11 +15,13 @@
     margin: 0 32px 28px 0;
 
     &__mainHeading {
-      color: blue;
+      color: $text-dark;
+      font-size: 24px;
     }
 
     &__subHeading {
-      color: red;
+      color: $text-light;
+      font-size: 16px;
     }
   }
 
@@ -27,7 +30,19 @@
     margin: 0 0 28px 0;
   }
 
+  button {
+    color: white;
+    margin: 0;
+    line-height: 1rem;
+    height: 32px;
+    border-radius: 5px;
+  }
+
   &__filterButton {
     margin: 0 24px 0 0;
+
+    button {
+      width: 145px;
+    }
   }
 }

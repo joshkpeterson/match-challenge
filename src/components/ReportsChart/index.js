@@ -33,6 +33,9 @@ export default function ReportsChart({ filteredData, totalAll }) {
               backgroundColor: null,
               borderWidth: 0,
               color: 'white',
+              font: {
+                size: 16,
+              },
               formatter: function (value, context) {
                 console.log(value);
                 return Math.round((value / totalAll) * 100) + '%';

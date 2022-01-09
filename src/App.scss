@@ -1,7 +1,35 @@
-@import '~bootstrap/scss/bootstrap';
+$theme-colors: (
+  "primary": #1bc5bd,
+  "secondary": #005b96,
+);
 
-.App {
-  font-family: 'Roboto', sans-serif;
-  font-family: 16;
-  font-weight: bold;
+@import '~bootstrap/scss/bootstrap';
+@import 'variables';
+@import 'mixins';
+
+// Override bootstrap accordion caret
+.accordion-button:after {
+  display: none;
+}
+
+.accordion-item {
+  border: none;
+  margin-bottom: 5px;
+  border-radius: 10px !important;
+  background-color: $bg-light;
+
+  .accordion-button {
+    border-radius: 10px !important;
+    font-weight: bold;
+  }
+
+  .accordion-button:not(.collapsed) {
+    color: $text-dark;
+    background-color: white;
+    box-shadow: none;
+  }
+}
+
+th {
+  font-weight: normal;
 }
