@@ -14,6 +14,35 @@
     height: 80px;
     padding: 0 100px 0 35px;
     border-bottom: 2px solid #f3f6f9;
+    display: flex;
+    flex-wrap: inherit;
+    align-items: center;
+    justify-content: space-between;
+
+    &__mainIcon {
+      margin: 0 38px 0 0;
+    }
+
+    &__secondaryIcon {
+      margin-right: auto;
+    }
+
+    &__userAvatar {
+      width: 43px;
+      height: 43px;
+      background: $yellow;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 5px;
+      font-size: 23px;
+    }
+
+    &__userName {
+      margin: 0 0 0 11px;
+      color: $text-dark-blue;
+    }
   }
 
   &__sideNavbar {
