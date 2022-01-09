@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import Reports from 'layouts/Reports';
 import {
+  Container,
   Nav,
   Navbar,
 } from 'react-bootstrap';
@@ -8,7 +9,14 @@ import './App.scss';
 import styles from './App.module.scss';
 
 const AppNavbar = <Navbar className={styles.App__appNavbar}>
-<Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+  <Container fluid>
+  <Navbar.Brand href="#home">
+      <img src="/img/app-icon-main.svg" alt="App icon main"  />
+  </Navbar.Brand>
+  <Navbar.Text className="me-auto">hello</Navbar.Text>
+      <Navbar.Text  >right</Navbar.Text>
+  </Container>
+
 </Navbar>
 
 const SideNavbar = <Nav className={styles.App__sideNavbar}>
@@ -21,7 +29,7 @@ const SideNavbar = <Nav className={styles.App__sideNavbar}>
 <Nav.Link href="#" className={styles.App__sideNavbar__item} >
   <img src="/img/nav-item-3-icon.svg" alt="Nav icon 3" />
 </Nav.Link>
-<Nav.Link href="#" className={styles.App__sideNavbar__item} >
+<Nav.Link href="#reports" className={styles.App__sideNavbar__item} >
   <img src="/img/nav-item-reports-icon.svg" alt="Nav icon reports" />
 </Nav.Link>
 <Nav.Link href="#" className={styles.App__sideNavbar__item} >

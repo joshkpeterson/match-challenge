@@ -12,6 +12,7 @@
 
   &__appNavbar {
     height: 80px;
+    padding: 0 100px 0 35px;
     border-bottom: 2px solid #f3f6f9;
   }
 
@@ -22,7 +23,8 @@
     align-items: center;
 
     &__item {
-      padding: 12px;
+      padding: 12px 0;
+      margin-right: 6px;
 
       &:first-child {
         padding-top: 0;
