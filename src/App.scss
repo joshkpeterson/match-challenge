@@ -7,7 +7,7 @@ $theme-colors: (
 @import 'variables';
 @import 'mixins';
 
-// Override bootstrap accordion caret
+// Bootstrap component styles overrides
 .accordion-button:after {
   display: none;
 }
@@ -30,6 +30,7 @@ $theme-colors: (
   }
 }
 
+// User Agent overrides
 th {
   font-weight: normal;
 }
