@@ -8,37 +8,38 @@ import './App.scss';
 import styles from './App.module.scss';
 
 const AppNavbar = <Navbar className={styles.App__appNavbar}>
-    <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+<Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
 </Navbar>
 
 const SideNavbar = <Nav className={styles.App__sideNavbar}>
-  <Nav.Link href="#">
-    one
-  </Nav.Link>
-  <Nav.Link href="#">
-    one
-  </Nav.Link>
-  <Nav.Link href="#">
-    one
-  </Nav.Link>
-  <Nav.Link href="#">
-    one
-  </Nav.Link>
-  <Nav.Link href="#">
-    one
-  </Nav.Link>
+<Nav.Link href="#" className={styles.App__sideNavbar__item} >
+  <img src="/img/nav-item-1-icon.svg" alt="Nav icon 1" />
+</Nav.Link>
+<Nav.Link href="#" className={styles.App__sideNavbar__item} >
+  <img src="/img/nav-item-2-icon.svg" alt="Nav icon 2" />
+</Nav.Link>
+<Nav.Link href="#" className={styles.App__sideNavbar__item} >
+  <img src="/img/nav-item-3-icon.svg" alt="Nav icon 3" />
+</Nav.Link>
+<Nav.Link href="#" className={styles.App__sideNavbar__item} >
+  <img src="/img/nav-item-reports-icon.svg" alt="Nav icon reports" />
+</Nav.Link>
+<Nav.Link href="#" className={styles.App__sideNavbar__item} >
+  <img src="/img/nav-item-5-icon.svg" alt="Nav icon 5" />
+</Nav.Link>
 </Nav>
 
 function App() {
   return (
     <div className={styles.App}>
-      {AppNavbar}
-      <div className={styles.App__innerContainer}>
-        {SideNavbar}
-        <Reports />
-      </div>
+    {AppNavbar}
+    <div className={styles.App__innerContainer}>
+    {SideNavbar}
+    <Reports />
     </div>
-  );
-}
-
-export default App;
+    </div>
+    );
+  }
+  
+  export default App;
+  

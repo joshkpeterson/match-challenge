@@ -20,5 +20,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    &__item {
+      padding: 12px;
+
+      &:first-child {
+        padding-top: 0;
+      }
+    }
   }
 }
