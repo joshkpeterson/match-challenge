@@ -30,21 +30,19 @@
     margin: 0 0 28px 0;
   }
 
+  button {
+    color: white;
+    margin: 0;
+    line-height: 1rem;
+    height: 32px;
+    border-radius: 5px;
+  }
+
   &__filterButton {
     margin: 0 24px 0 0;
 
     button {
-      line-height: 16px;
       width: 145px;
-      height: 32px;
-      color: white;
     }
-  }
-
-  &__submitButton {
-    color: white;
-    margin: 0 24px 0 0;
-    line-height: 16px;
-    height: 32px;
   }
 }
