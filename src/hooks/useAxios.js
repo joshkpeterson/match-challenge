@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { baseURL } from 'constants';
 
@@ -9,7 +9,7 @@ const useAxios = ({ url, method, body = null, headers = null }) => {
   const [error, setError] = useState('');
   const [loading, setloading] = useState(true);
 
-  const fetchData = () => {
+  const fetchData = useCallback(() => {
     axios[method](url, JSON.parse(body), JSON.parse(headers))
       .then((res) => {
         setResponse(res.data);
@@ -20,11 +20,11 @@ const useAxios = ({ url, method, body = null, headers = null }) => {
       .finally(() => {
         setloading(false);
       });
-  };
+  }, [body, headers, method, url]);
 
   useEffect(() => {
     fetchData();
-  }, [method, url, body, headers]);
+  }, [method, url, body, headers, fetchData]);
 
   return { response, error, loading };
 };

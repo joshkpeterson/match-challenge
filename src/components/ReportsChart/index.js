@@ -48,7 +48,7 @@ export default function ReportsChart({ filteredData, totalAll }) {
 
     setChartData(transformedData);
     console.log(transformedData);
-  }, [filteredData]);
+  }, [filteredData, totalAll]);
 
   return (
     <div className={styles.reportsChart}>

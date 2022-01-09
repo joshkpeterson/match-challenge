@@ -18,7 +18,6 @@ export default function Reports() {
 
   const {
     response: projectsResponse,
-    projectsLoading,
     projectsError,
   } = useAxios({
     method: 'get',
@@ -27,7 +26,6 @@ export default function Reports() {
 
   const {
     response: gatewaysResponse,
-    gatewaysLoading,
     gatewaysError,
   } = useAxios({
     method: 'get',
