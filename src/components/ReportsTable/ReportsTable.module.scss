@@ -7,7 +7,6 @@
   background-color: $bg-light;
   border-radius: 10px;
   padding: 18px;
-  margin: 0 31px 0 0;
 
   &__heading {
     margin: 0 0 34px 0;
@@ -33,7 +32,8 @@
       }
     }
 
-    &__row, &__header {
+    &__row,
+    &__header {
       height: 41px;
 
       & > * {
@@ -46,7 +46,7 @@
         &:nth-child(2) {
           text-align: center;
         }
-      };
+      }
     }
   }
 }

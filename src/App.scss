@@ -1,13 +1,13 @@
 $theme-colors: (
-  "primary": #1bc5bd,
-  "secondary": #005b96,
+  'primary': #1bc5bd,
+  'secondary': #005b96,
 );
 
 @import '~bootstrap/scss/bootstrap';
 @import 'variables';
 @import 'mixins';
 
-// Override bootstrap accordion caret
+// Bootstrap component styles overrides
 .accordion-button:after {
   display: none;
 }
@@ -28,6 +28,11 @@ $theme-colors: (
     background-color: white;
     box-shadow: none;
   }
+}
+
+// User Agent overrides
+th {
+  font-weight: normal;
 }
 
 th {
