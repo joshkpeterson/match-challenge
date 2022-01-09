@@ -16,18 +16,12 @@ export default function Reports() {
   const [selectedGatewaySubmitted, setSelectedGatewaySubmitted] = useState();
   const [totalAll, setTotalAll] = useState(0);
 
-  const {
-    response: projectsResponse,
-    projectsError,
-  } = useAxios({
+  const { response: projectsResponse, projectsError } = useAxios({
     method: 'get',
     url: '/projects',
   });
 
-  const {
-    response: gatewaysResponse,
-    gatewaysError,
-  } = useAxios({
+  const { response: gatewaysResponse, gatewaysError } = useAxios({
     method: 'get',
     url: '/gateways',
   });
@@ -157,28 +151,38 @@ export default function Reports() {
           selectedGateway={selectedGateway}
           onSetFilters={onSetFilters}
         />
-      {!filteredData.length ? (
-        <div className={styles.reports__placeholder}>
-          <div className={styles.reports__placeholder__heading}>No Reports</div>
-          <div className={styles.reports__placeholder__text}>Currently you have no data for the reports to be generated. Once you start generating traffic through the Balance application the reports will be shown.</div>
-          <img src="/img/no-reports-graphic.svg" className={styles.reports__placeholder__image} alt="Placeholder graphic for no reports generated"/>
-        </div>
-      ) : (
-        <div className={styles.reports__innerContainer}>
-          <ReportsTable
-            selectedProject={selectedProjectSubmitted}
-            selectedGateway={selectedGatewaySubmitted}
-            projects={projectsData}
-            gateways={gatewaysData}
-            filteredData={filteredData}
-            totalAll={totalAll}
-          />
-          {((!selectedProjectSubmitted && selectedGatewaySubmitted) ||
-            (selectedProjectSubmitted && !selectedGatewaySubmitted)) && (
-            <ReportsChart filteredData={filteredData} totalAll={totalAll} />
-          )}
-        </div>
-      )}
+        {!filteredData.length ? (
+          <div className={styles.reports__placeholder}>
+            <div className={styles.reports__placeholder__heading}>
+              No Reports
+            </div>
+            <div className={styles.reports__placeholder__text}>
+              Currently you have no data for the reports to be generated. Once
+              you start generating traffic through the Balance application the
+              reports will be shown.
+            </div>
+            <img
+              src="/img/no-reports-graphic.svg"
+              className={styles.reports__placeholder__image}
+              alt="Placeholder graphic for no reports generated"
+            />
+          </div>
+        ) : (
+          <div className={styles.reports__innerContainer}>
+            <ReportsTable
+              selectedProject={selectedProjectSubmitted}
+              selectedGateway={selectedGatewaySubmitted}
+              projects={projectsData}
+              gateways={gatewaysData}
+              filteredData={filteredData}
+              totalAll={totalAll}
+            />
+            {((!selectedProjectSubmitted && selectedGatewaySubmitted) ||
+              (selectedProjectSubmitted && !selectedGatewaySubmitted)) && (
+              <ReportsChart filteredData={filteredData} totalAll={totalAll} />
+            )}
+          </div>
+        )}
       </div>
     </>
   );

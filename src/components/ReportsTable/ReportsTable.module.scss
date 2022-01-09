@@ -32,7 +32,8 @@
       }
     }
 
-    &__row, &__header {
+    &__row,
+    &__header {
       height: 41px;
 
       & > * {
@@ -45,8 +46,7 @@
         &:nth-child(2) {
           text-align: center;
         }
-      };
+      }
     }
   }
 }
-

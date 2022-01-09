@@ -71,8 +71,10 @@ export default function ReportsHeader({
           <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
         </DropdownButton>
 
-        <Button variant="secondary" onClick={onSetFilters}
-                  className={styles.reportsHeader__submitButton}
+        <Button
+          variant="secondary"
+          onClick={onSetFilters}
+          className={styles.reportsHeader__submitButton}
         >
           Generate Report
         </Button>
