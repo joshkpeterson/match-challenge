@@ -1,0 +1,11 @@
+@import 'variables';
+
+@mixin heading {
+  color: $text-dark;
+  font-size: 24px;
+}
+
+@mixin subHeading {
+  color: $text-light;
+  font-size: 16px;
+}

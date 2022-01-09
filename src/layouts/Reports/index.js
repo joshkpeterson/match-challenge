@@ -159,8 +159,12 @@ export default function Reports() {
           selectedGateway={selectedGateway}
           onSetFilters={onSetFilters}
         />
-      {projectsLoading || gatewaysLoading ? (
-        <p>Loading...</p>
+      {!filteredData.length ? (
+        <div className={styles.reports__placeholder}>
+          <div className={styles.reports__placeholder__heading}>No Reports</div>
+          <div className={styles.reports__placeholder__text}>Currently you have no data for the reports to be generated. Once you start generating traffic through the Balance application the reports will be shown.</div>
+          <img src="/img/no-reports-graphic.svg" className={styles.reports__placeholder__image} alt="Placeholder graphic for no reports generated"/>
+        </div>
       ) : (
         <div className={styles.reports__innerContainer}>
           <ReportsTable

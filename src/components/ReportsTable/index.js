@@ -52,7 +52,7 @@ export default function ReportsTable({
 
   return (
     <div className={styles.reportsTable}>
-      {!!filteredData && (
+      {!!filteredData.length && (
         <>
           <p className={styles.reportsTable__heading}>
             {selectedProject ? `${selectedProject.name}` : 'All Projects'} |{' '}

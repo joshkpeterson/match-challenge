@@ -8,10 +8,11 @@
   &__innerContainer {
     display: flex;
     padding: 35px 100px 0 0;
+    flex: 1;
   }
 
   &__appNavbar {
-    height: 80px;
+    height: $app-nav-height;
     padding: 0 100px 0 35px;
     border-bottom: 2px solid #f3f6f9;
     display: flex;
