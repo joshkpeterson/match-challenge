@@ -6,3 +6,30 @@ $theme-colors: (
 @import '~bootstrap/scss/bootstrap';
 @import 'variables';
 @import 'mixins';
+
+// Override bootstrap accordion caret
+.accordion-button:after {
+  display: none;
+}
+
+.accordion-item {
+  border: none;
+  margin-bottom: 5px;
+  border-radius: 10px !important;
+  background-color: $bg-light;
+
+  .accordion-button {
+    border-radius: 10px !important;
+    font-weight: bold;
+  }
+
+  .accordion-button:not(.collapsed) {
+    color: $text-dark;
+    background-color: white;
+    box-shadow: none;
+  }
+}
+
+th {
+  font-weight: normal;
+}
