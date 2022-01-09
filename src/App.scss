@@ -1,13 +1,14 @@
 $theme-colors: (
   "primary": #1bc5bd,
-  "secondary": #005b96
+  "secondary": #005b96,
 );
 
 
 @import '~bootstrap/scss/bootstrap';
+@import 'variables';
 
 .App {
-  font-family: 'Roboto', sans-serif;
+  font-family: $sans-serif;
   font-family: 16;
   font-weight: bold;
 }

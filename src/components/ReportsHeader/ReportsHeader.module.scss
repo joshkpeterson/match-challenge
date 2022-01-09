@@ -1,3 +1,5 @@
+@import 'variables';
+
 .reportsHeader {
   margin: 32px 0 0 0;
   text-align: left;
@@ -14,11 +16,11 @@
     margin: 0 32px 28px 0;
 
     &__mainHeading {
-      color: blue;
+      color: $text-dark;
     }
 
     &__subHeading {
-      color: red;
+      color: $text-light;
     }
   }
 
