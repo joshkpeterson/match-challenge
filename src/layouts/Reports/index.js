@@ -159,7 +159,6 @@ export default function Reports() {
           selectedGateway={selectedGateway}
           onSetFilters={onSetFilters}
         />
-      </div>
       {projectsLoading || gatewaysLoading ? (
         <p>Loading...</p>
       ) : (
@@ -178,6 +177,7 @@ export default function Reports() {
           )}
         </div>
       )}
+      </div>
     </>
   );
 }
