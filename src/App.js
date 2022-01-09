@@ -45,7 +45,9 @@ function App() {
         <Reports />
       </div>
     </div>
-  );
-}
-
-export default App;
+    </div>
+    );
+  }
+  
+  export default App;
+  
