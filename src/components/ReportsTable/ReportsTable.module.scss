@@ -1,8 +1,6 @@
 .reportsTable {
-  display: inline-block;
-  // width: 100%;
-  min-width: 50%;
-  vertical-align: top;
+  flex: 1;
+  min-width: 520px;
 
   &__heading {
     color: tomato;
