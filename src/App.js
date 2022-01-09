@@ -45,7 +45,6 @@ function App() {
         <Reports />
       </div>
     </div>
-    </div>
     );
   }
   
