@@ -1,16 +1,17 @@
 import logo from './logo.svg';
-import './App.scss';
 import Reports from 'layouts/Reports';
 import {
   Nav,
   Navbar,
 } from 'react-bootstrap';
+import './App.scss';
+import styles from './App.module.scss';
 
-const AppNavbar = <Navbar className="App__appNavbar">
+const AppNavbar = <Navbar className={styles.App__appNavbar}>
     <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
 </Navbar>
 
-const SideNavbar = <Nav className="App__sideNavbar">
+const SideNavbar = <Nav className={styles.App__sideNavbar}>
   <Nav.Link href="#">
     one
   </Nav.Link>
@@ -30,9 +31,9 @@ const SideNavbar = <Nav className="App__sideNavbar">
 
 function App() {
   return (
-    <div className="App">
+    <div className={styles.App}>
       {AppNavbar}
-      <div className="App__innerContainer">
+      <div className={styles.App__innerContainer}>
         {SideNavbar}
         <Reports />
       </div>

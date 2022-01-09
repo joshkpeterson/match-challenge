@@ -133,7 +133,7 @@ export default function Reports() {
 
   return (
     <>
-      <div>
+      <div className={styles.reports}>
         <ReportsHeader
           projects={projectsData}
           gateways={gatewaysData}

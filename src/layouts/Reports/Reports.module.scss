@@ -1,4 +1,7 @@
-reports {
+.reports {
+  flex-grow: 1;
+  flex-shrink: 0;
+
   &__innerContainer {
     display: flex;
     flex-wrap: wrap;

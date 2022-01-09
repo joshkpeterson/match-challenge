@@ -3,25 +3,5 @@ $theme-colors: (
   "secondary": #005b96,
 );
 
-
 @import '~bootstrap/scss/bootstrap';
 @import 'variables';
-
-.App {
-  font-family: $sans-serif;
-  font-size: 16px;
-  font-weight: bold;
-
-  &__innerContainer {
-    display: flex;
-  }
-
-  &__appNavbar {
-
-  }
-
-  &__sideNavbar {
-    display: flex;
-    flex-direction: column;
-  }
-}
